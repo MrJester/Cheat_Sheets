@@ -1,0 +1,16 @@
+Useful Information
+
+# Lists details of a Soft Raid Array
+mdadm --detail
+
+# Export Raid UUID to the madam conf file.
+mdadm --examine --scan >> /etc/mdadm/mdadm.conf
+
+# Rebuild Corrupt Array
+mdadm --create /dev/md0 --assume-clean --level=5 --verbose --raid-devices=3 /dev/sda1 missing /dev/sdc1
+
+# Removes Opportunistic Locking to help with locking CIFS shares when coping large or 
+# multiple small files.
+# cifs client workaround
+modprobe cifs
+echo 0 > /proc/fs/cifs/OplockEnabled
